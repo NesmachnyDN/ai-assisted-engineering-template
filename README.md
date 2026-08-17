@@ -13,9 +13,10 @@ New project? Do not study the repository file by file.
 1. Use this repository as a template or clone it.
 2. Open **[`BOOTSTRAP.md`](BOOTSTRAP.md)**.
 3. Fill the minimum project contract in `PROJECT_CONTEXT.md`.
-4. Pass the two bootstrap checklists.
-5. Run `doc/prompts/bootstrap-first-pr.md` to obtain exactly one implementation-ready bounded PR prompt.
-6. Implement and independently review that PR.
+4. Run `python scripts/bootstrap_check.py` and resolve machine-checkable blockers.
+5. Complete the qualitative adoption checklist.
+6. Run `doc/prompts/bootstrap-first-pr.md` to obtain exactly one implementation-ready bounded PR prompt.
+7. Implement and independently review that PR.
 
 The bootstrap path is designed to move a new user from an untouched template to the first correctly governed bounded PR without requiring prior knowledge of the complete documentation set.
 
@@ -78,6 +79,8 @@ Once the first bounded PR has passed review, use the normal operating loop:
 - `BOOTSTRAP.md` — guided adoption path for a new project.
 - `PROJECT_CONTEXT.md` — compact authoritative project contract.
 - `AGENTS.md` — repository-wide rules for AI coding agents.
+- `scripts/bootstrap_check.py` — stdlib-only machine check for minimum bootstrap readiness.
+- `tests/test_bootstrap_check.py` — regression tests for the validator.
 - `doc/bootstrap/` — context and adoption readiness gates.
 - `doc/architecture/` — architecture context, principles, and ADRs.
 - `doc/roadmaps/` — bounded implementation planning.
@@ -86,6 +89,16 @@ Once the first bounded PR has passed review, use the normal operating loop:
 - `doc/standards/` — engineering, testing, documentation, and prompt quality rules.
 - `templates/` — reusable local governance templates.
 - `examples/` — worked examples showing the workflow in practice.
+
+## Validate the template tooling
+
+The bootstrap validator has no third-party runtime dependencies beyond Python 3. Run its regression tests with:
+
+```bash
+python -m unittest discover -s tests
+```
+
+Projects generated from this template may replace or remove this validator if their chosen toolchain provides an equivalent gate, but the adoption contract should remain explicit.
 
 ## Minimum adoption contract
 
