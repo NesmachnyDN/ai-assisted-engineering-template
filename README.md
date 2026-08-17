@@ -4,6 +4,8 @@ A reusable, architecture-governed project template for AI-assisted software engi
 
 This repository is designed for teams and individual engineers who want AI coding agents to work inside explicit architectural, quality, testing, and review guardrails rather than treating prompts as disposable chat instructions.
 
+> The central idea: AI may accelerate engineering, but project truth, architecture boundaries, validation evidence, and merge decisions remain governed engineering artifacts.
+
 ## Core workflow
 
 ```text
@@ -30,6 +32,8 @@ Merge
 Roadmap update
 ```
 
+See [`doc/workflow.md`](doc/workflow.md) for the detailed operating model.
+
 ## Principles
 
 - **Authoritative context before implementation.** Agents must read project governance, architecture, roadmap, and applicable local instructions before changing code.
@@ -39,6 +43,7 @@ Roadmap update
 - **Implementation and review are separate concerns.** Review the actual diff and repository state independently of implementation claims.
 - **Tests are evidence, not decoration.** Record exact validation commands and results. Distinguish pre-existing baseline failures from regressions introduced by the change.
 - **Roadmap state follows repository reality.** Update planning artifacts only after implementation/review outcomes justify the state transition.
+- **Human governance remains explicit.** AI can propose, implement, test, and review; material architecture and merge authority follow project policy.
 
 ## Quick start
 
@@ -55,6 +60,37 @@ Roadmap update
 11. If blockers exist, use `doc/prompts/remediation.md` and re-review the resulting HEAD.
 12. Merge only when the applicable acceptance criteria are satisfied, then update roadmap state.
 
+## Minimum adoption checklist
+
+Before the first AI-assisted implementation PR, make sure the project has:
+
+- [ ] project purpose, scope, runtime, and quality gates in `PROJECT_CONTEXT.md`;
+- [ ] root AI/contributor governance in `AGENTS.md`;
+- [ ] system/module boundaries in `doc/architecture/context.md`;
+- [ ] project-specific architecture invariants;
+- [ ] at least one active roadmap with bounded PR items;
+- [ ] exact local or CI validation commands;
+- [ ] a defined policy for architecture blockers;
+- [ ] a human merge authority.
+
+Do not fill every template section merely because it exists. Delete irrelevant placeholders and keep the authoritative context compact enough to remain usable.
+
+## Worked example
+
+The fictional [`Document Status Notifier`](examples/document-status-notifier/) demonstrates the artifact chain without requiring a complete application:
+
+```text
+PROJECT_CONTEXT
+    ↓
+Roadmap PR-1.1
+    ↓
+PR-specific implementation prompt
+    ↓
+Illustrative independent review
+```
+
+Use it to understand the expected level of detail before adapting the template to a real project.
+
 ## Repository structure
 
 ```text
@@ -62,9 +98,13 @@ Roadmap update
 ├── AGENTS.md
 ├── PROJECT_CONTEXT.md
 ├── README.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── .gitignore
 ├── .github/
 │   └── pull_request_template.md
 ├── doc/
+│   ├── workflow.md
 │   ├── architecture/
 │   │   ├── context.md
 │   │   ├── principles.md
@@ -81,9 +121,24 @@ Roadmap update
 │       ├── code-quality.md
 │       ├── documentation.md
 │       └── testing.md
+├── examples/
+│   └── document-status-notifier/
 └── templates/
     └── bounded-context-AGENTS.template.md
 ```
+
+## What each artifact is for
+
+| Artifact | Purpose |
+| --- | --- |
+| `PROJECT_CONTEXT.md` | Compact project identity, scope, stack, invariants, quality gates, and current roadmap pointer |
+| `AGENTS.md` | Repository-wide rules that AI agents and contributors must obey |
+| Local `AGENTS.md` | Additional rules for one bounded context/subtree |
+| `doc/architecture/*` | System boundaries, principles, and durable decisions |
+| `doc/roadmaps/*` | Dependency-aware sequencing into bounded PRs |
+| `doc/prompts/*` | Reusable workflow prompts |
+| `doc/codex-prompts/*` | Project-specific, versioned execution prompts |
+| `.github/pull_request_template.md` | PR traceability and factual validation evidence |
 
 ## AGENTS.md hierarchy
 
@@ -115,6 +170,10 @@ Classify findings as:
 ## CI policy
 
 This template does not assume that hosted CI is available. Projects may rely on local validation. When CI is unavailable by design, its absence is not itself a merge blocker; the PR should record exact local commands and factual results. Projects that do have CI should add their required checks to `AGENTS.md` and `doc/standards/testing.md`.
+
+## Security and confidentiality
+
+Treat AI prompts, logs, test fixtures, and generated documentation as potential disclosure surfaces. Do not put real secrets, production data, personal data, private keys, or confidential internal architecture into the repository or prompts. See [`SECURITY.md`](SECURITY.md).
 
 ## What this template is not
 
