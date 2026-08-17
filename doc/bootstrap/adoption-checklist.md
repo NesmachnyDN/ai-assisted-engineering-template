@@ -2,8 +2,25 @@
 
 Run this after project context is complete and before generating the first implementation prompt.
 
+## Automated minimum gate
+
+From the repository root run:
+
+```bash
+python scripts/bootstrap_check.py
+```
+
+Expected success output begins with:
+
+```text
+BOOTSTRAP CHECK: READY
+```
+
+A non-zero exit status means bootstrap is blocked. Fix the reported machine-checkable issues before continuing. The validator intentionally does **not** decide whether the architecture itself is good or whether a roadmap item is appropriately decomposed; those remain human/reviewer checks below.
+
 ## Repository adoption
 
+- [ ] Automated bootstrap check reports `READY`.
 - [ ] Template-specific sample values have been removed from active project documents.
 - [ ] `PROJECT_CONTEXT.md` passes `project-context-checklist.md`.
 - [ ] Root `AGENTS.md` rules are compatible with the project.
