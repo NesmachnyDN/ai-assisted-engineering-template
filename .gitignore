@@ -1,0 +1,60 @@
+# Secrets / local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node
+node_modules/
+.npm/
+.pnpm-store/
+
+# Java / JVM
+.gradle/
+build/
+target/
+*.class
+
+# .NET
+bin/
+obj/
+
+# Coverage / test artifacts
+.coverage
+coverage.xml
+htmlcov/
+coverage/
+test-results/
+
+# Generic build/temp artifacts
+dist/
+out/
+tmp/
+temp/
+*.log
+
+# Local project overrides
+PROJECT_CONTEXT.local.md
+*.local.md
