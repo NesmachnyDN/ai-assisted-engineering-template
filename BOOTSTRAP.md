@@ -42,7 +42,7 @@ Open `PROJECT_CONTEXT.md` and replace the placeholders in these sections first:
 
 If a required fact is unknown, write `TBD — BLOCKER: <decision needed>` rather than inventing it. A blocker affecting scope, architecture, security, data compatibility, or acceptance prevents implementation PR generation.
 
-Use `doc/bootstrap/project-context-checklist.md` as the completion gate.
+Use `doc/bootstrap/project-context-checklist.md` as the human-readable completion gate.
 
 ## Gate 2 — Adopt repository governance
 
@@ -69,11 +69,25 @@ Describe outcomes and dependency order, not a large implementation dump. Each ro
 
 Update `PROJECT_CONTEXT.md` so **Current roadmap** points to this file and identifies the current phase/item.
 
-## Gate 4 — Run the adoption check
+## Gate 4 — Run automated and human adoption checks
 
-Complete `doc/bootstrap/adoption-checklist.md`.
+Run the stdlib-only validator from the repository root:
 
-Stop if any blocking item remains. Resolve architecture decisions explicitly; use an ADR when the decision is consequential, durable, or constrains future work.
+```bash
+python scripts/bootstrap_check.py
+```
+
+On systems where the interpreter is exposed as `python3`:
+
+```bash
+python3 scripts/bootstrap_check.py
+```
+
+The command exits with code `0` and prints `BOOTSTRAP CHECK: READY` only when the minimum machine-checkable contract is satisfied. It checks required `PROJECT_CONTEXT.md` sections, unresolved template placeholders/blockers, root `AGENTS.md`, and the active roadmap path.
+
+Then complete `doc/bootstrap/adoption-checklist.md` for qualitative checks the script cannot safely infer, such as whether architecture boundaries are meaningful and roadmap decomposition is reviewable.
+
+Stop if either check is blocked. Resolve architecture decisions explicitly; use an ADR when the decision is consequential, durable, or constrains future work.
 
 ## Gate 5 — Generate exactly one first bounded PR
 
@@ -101,6 +115,7 @@ A PR is ready only when mandatory blockers are absent and the required validatio
 ## Bootstrap completion checklist
 
 - [ ] `PROJECT_CONTEXT.md` is project-specific and passes its checklist.
+- [ ] `python scripts/bootstrap_check.py` reports `BOOTSTRAP CHECK: READY`.
 - [ ] Root governance is understood and local ownership rules exist where necessary.
 - [ ] One active roadmap exists and is referenced from project context.
 - [ ] Architecture blockers required for the first item are resolved.
