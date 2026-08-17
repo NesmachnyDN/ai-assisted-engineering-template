@@ -4,6 +4,8 @@
 
 A reusable repository template for engineers and architects who want AI-assisted development to remain bounded, traceable, independently reviewable, and driven by explicit architecture rather than disposable chat prompts.
 
+> **Status: Stable / dogfooding — v0.2.0.** The core workflow is functionally complete. Further automation is intentionally deferred until repeated real-world adoption feedback demonstrates a concrete need.
+
 > AI may accelerate engineering, but project truth, architecture boundaries, validation evidence, and merge decisions remain governed engineering artifacts.
 
 ## Start here
@@ -114,6 +116,12 @@ Before the first AI-assisted implementation PR, the project must have enough inf
 - human architecture and merge authority.
 
 The detailed gates live in `doc/bootstrap/`. Do not fill documentation merely because a template section exists; keep project truth compact, current, and authoritative.
+
+## Release policy
+
+`v0.2.0` is the stable baseline for real-project adoption. The repository is now in **dogfooding mode**: maintenance, correctness fixes, documentation clarifications, and changes justified by observed use are welcome; speculative feature expansion is not.
+
+Potential automation such as an interactive project initializer is deliberately postponed. It should be introduced only if repeated adoption shows that the same manual bootstrap steps are a material source of friction or error.
 
 ## What this template is not
 
