@@ -102,7 +102,10 @@ Use it to understand the expected level of detail before adapting the template t
 ├── SECURITY.md
 ├── .gitignore
 ├── .github/
-│   └── pull_request_template.md
+│   ├── pull_request_template.md
+│   └── ISSUE_TEMPLATE/
+│       ├── architecture-decision.md
+│       └── bounded-change.md
 ├── doc/
 │   ├── workflow.md
 │   ├── architecture/
@@ -120,6 +123,7 @@ Use it to understand the expected level of detail before adapting the template t
 │   └── standards/
 │       ├── code-quality.md
 │       ├── documentation.md
+│       ├── prompt-design.md
 │       └── testing.md
 ├── examples/
 │   └── document-status-notifier/
@@ -138,7 +142,9 @@ Use it to understand the expected level of detail before adapting the template t
 | `doc/roadmaps/*` | Dependency-aware sequencing into bounded PRs |
 | `doc/prompts/*` | Reusable workflow prompts |
 | `doc/codex-prompts/*` | Project-specific, versioned execution prompts |
+| `doc/standards/prompt-design.md` | Quality gate for PR-specific implementation prompts |
 | `.github/pull_request_template.md` | PR traceability and factual validation evidence |
+| `.github/ISSUE_TEMPLATE/*` | Structured intake for bounded changes and architecture decisions |
 
 ## AGENTS.md hierarchy
 
